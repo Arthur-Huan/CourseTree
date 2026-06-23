@@ -11,7 +11,11 @@ Browse hundreds of courses at once in a high-density grid, with live requisite f
 
 ## Screenshots
 
-*(placeholder)*
+![Grid View Screenshot](screenshots/Grid.png)
+*Grid View*
+
+![Tree View Screenshot](screenshots/Tree.png)
+*Tree View*
 
 ## Tech Stack
 
