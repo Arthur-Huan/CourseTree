@@ -1,6 +1,7 @@
 # CourseTree
 
 **Live link:** [CourseTree website](https://arthur-huan.github.io/course-tree/)
+
 CourseTree turns a university course catalog into an interactive planning tool. A Python scraping and NLP pipeline extracts structured prerequisite relationships from unstructured catalog text, which are visualized through synchronized grid and DAG views built with React and TypeScript.
 
 Built end-to-end by a University of Calgary student, for students.
