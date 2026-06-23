@@ -2,7 +2,7 @@
 
 **Live link:** [CourseTree website](https://arthur-huan.github.io/course-tree/)
 
-CourseTree turns a university course catalog into an interactive planning tool. A Python scraping and NLP pipeline extracts structured prerequisite relationships from unstructured catalog text, which are visualized through synchronized grid and DAG views built with React and TypeScript.
+CourseTree turns a university course catalog into an interactive planning tool. A Python scraping and NLP pipeline extracts structured course data and requisite logic from unstructured catalog text, which are visualized through synchronized grid and DAG views built with React and TypeScript.
 
 Built end-to-end by a University of Calgary student, for students.
 
@@ -28,14 +28,6 @@ Browse hundreds of courses at once in a high-density grid, with live requisite f
 | Graph rendering | React Flow, Dagre |
 | Styling | Tailwind CSS |
 | Persistence | Local storage |
-
-## Problem & Scope
-
-University course catalogs describe prerequisites as unstructured text (e.g. "BIOL 213 or 211; CHEM 202 or 203"). There's no structured, queryable representation a student can use to answer questions like "What's the shortest path to this course?" or "What do I need to take in Year 2 for this Year 4 course?".
-
-This project addresses that in two parts:
-1. **Extraction:** scrape and parse catalog data into structured course records with normalized prerequisite, corequisite, and antirequisite relationships.
-2. **Visualization & planning:** present that structured data through two complementary interfaces: a grid with high information-density for large course lists, and a tree (technically a DAG) view for understanding relationships and hierarchies.
 
 ## Engineering Challenges
 
