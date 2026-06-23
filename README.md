@@ -32,18 +32,6 @@ This project addresses that in two parts:
 1. **Extraction:** scrape and parse catalog data into structured course records with normalized prerequisite, corequisite, and antirequisite relationships.
 2. **Visualization & planning:** present that structured data through two complementary interfaces: a grid with high information-density for large course lists, and a tree (technically a DAG) view for understanding relationships and hierarchies.
 
-## Architecture
-
-**Data pipeline:** Raw text from the catalog undergoes basic normalization and parsing and is validated against Pydantic models, and then parsed with spaCy to extract requisite logic (course codes, boolean relationships) from free-form sentences, and shaped into a normalized dataset before being exported for the frontend.
-
-**Frontend state:** Data like course data, selections, flags, and completion status live in singleton Zustand stores. Grid View and Tree View are both pure consumers of this store, neither owns its own copy of course state, which keeps the two views synchronized without manual reconciliation.
-
-**Grid model:** The grid is designed for high information density—100+ courses are visible simultaneously on a single page, giving an at-a-glance overview of an entire program rather than forcing course-by-course navigation. Filters and course hiding then allow narrowing down the scope while maintaining the big-picture view. Requisite satisfaction is computed reactively as a derived value from the store, so conflict feedback and prerequisite status update instantly across all visible courses as the user builds their plan.
-
-**Graph model:** Prerequisite/corequisite relationships are represented as a Directed Acyclic Graph (DAG): courses as nodes, requirements as directed edges. React Flow is used to render the DAG, with Dagre to compute node layout and custom edge routing (see below).
-
-**Local-first persistence:** All application state is stored in the browser. There's no backend database or account system: backup/export and restore/import are the mechanisms for moving data between sessions or devices. This gives users full control of their own data.
-
 ## Engineering Challenges
 
 **Scraping a hostile target:** The university catalog presents significant scraping barriers: randomized URLs, DDOS protection, and a JavaScript-rendered interface where course links are never exposed in the DOM and navigation doesn't open addressable pages. Selenium-based scraping was explored but proved too slow at scale. The pipeline instead ingests an exported CSV as a fallback, with the Scrapy spider reduced to a skeleton ingestion layer. A prior version scraped a now-outdated official archive using Scrapy as a fully-fledged crawler.
@@ -57,6 +45,18 @@ This project addresses that in two parts:
 **Pointer-event isolation across interactive layers:** Both views stack several interactive surfaces: nodes, detail popovers, a pannable and zoomable canvas, modals for filters and warnings, and a legend. Without explicit event scoping, both display and user interaction can have unintended layering. Each layer's pointer events are scoped independently to prevent this.
 
 **Backward compatibility with savefile versions:** As the features and state variables increased during production, and as decisions about the state variables to persist between sessions change, savefiles undergo different versions with different formats and recorded fields. It is a challenge to maintain backward compatibility such that older savefiles are still accepted and are updated to newer formats consistently.
+
+## Architecture
+
+**Data pipeline:** Raw text from the catalog undergoes basic normalization and parsing and is validated against Pydantic models, and then parsed with spaCy to extract requisite logic (course codes, boolean relationships) from free-form sentences, and shaped into a normalized dataset before being exported for the frontend.
+
+**Frontend state:** Data like course data, selections, flags, and completion status live in singleton Zustand stores. Grid View and Tree View are both pure consumers of this store, neither owns its own copy of course state, which keeps the two views synchronized without manual reconciliation.
+
+**Grid model:** The grid is designed for high information density—100+ courses are visible simultaneously on a single page, giving an at-a-glance overview of an entire program rather than forcing course-by-course navigation. Filters and course hiding then allow narrowing down the scope while maintaining the big-picture view. Requisite satisfaction is computed reactively as a derived value from the store, so conflict feedback and prerequisite status update instantly across all visible courses as the user builds their plan.
+
+**Graph model:** Prerequisite/corequisite relationships are represented as a Directed Acyclic Graph (DAG): courses as nodes, requirements as directed edges. React Flow is used to render the DAG, with Dagre to compute node layout and custom edge routing (see below).
+
+**Local-first persistence:** All application state is stored in the browser. There's no backend database or account system: backup/export and restore/import are the mechanisms for moving data between sessions or devices. This gives users full control of their own data.
 
 ## Key Features
 
