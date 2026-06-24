@@ -11,11 +11,11 @@ Browse hundreds of courses at once in a high-density grid, with live requisite f
 
 ## Screenshots
 
-![Grid View Screenshot](screenshots/Grid.png)
-*Grid View*
-
 ![Tree View Screenshot](screenshots/Tree.png)
 *Tree View*
+
+![Grid View Screenshot](screenshots/Grid.png)
+*Grid View*
 
 ## Tech Stack
 
@@ -31,7 +31,7 @@ Browse hundreds of courses at once in a high-density grid, with live requisite f
 
 ## Engineering Challenges
 
-**Scraping a hostile target:** The university catalog presents significant scraping barriers: randomized URLs, DDOS protection, and a JavaScript-rendered interface where course links are never exposed in the DOM and navigation doesn't open addressable pages. Selenium-based scraping was explored but proved too slow at scale. The pipeline instead ingests an exported CSV as a fallback, with the Scrapy spider reduced to a skeleton ingestion layer. A prior version scraped a now-outdated official archive using Scrapy as a fully-fledged crawler.
+**Scraping a hostile target:** The university catalog presents significant scraping barriers, especially after a recent redesign: randomized URLs, rate limiting, and a JavaScript-rendered interface where course links are never exposed in the DOM and navigation doesn't open addressable pages. Selenium-based scraping was explored but proved too slow at scale. The pipeline instead ingests an exported CSV as a fallback, with the Scrapy spider reduced to a skeleton ingestion layer. A prior version scraped a now-outdated official archive using Scrapy as a fully-fledged crawler.
 
 **Parsing unstructured requisite text:** Catalog descriptions of prerequisites are inconsistent in format and use natural-language boolean logic ("A or B, and C"). Even a few typos are present in the official data. The pipeline uses spaCy for entity extraction combined with rule-based logic to reconstruct the and/or structure, and outputs in a custom DSL that expands upon standard postfix notation. Standard boolean AND/OR logic cannot represent pool-based requisites ("2 courses from ..." or "6 credits from..."), so standard postfix was extended with pool operators to cover the full range of requisite structures found in the catalog to complement standard postfix with normalized operators and course codes.
 
