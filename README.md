@@ -17,6 +17,10 @@ Browse hundreds of courses at once in a high-density grid, with live requisite f
 ![Grid View Screenshot](screenshots/Grid.png)
 *Grid View*
 
+## Tutorials & Resources
+
+[YouTube](https://www.youtube.com/@CourseTreeApp)
+
 ## Tech Stack
 
 | Layer | Technologies |
