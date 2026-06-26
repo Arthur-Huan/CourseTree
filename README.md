@@ -1,13 +1,13 @@
 # CourseTree
 
 **Live link:** [CourseTree website](https://arthur-huan.github.io/course-tree/)
+**Walkthroughs & resources**: [YouTube](https://www.youtube.com/@CourseTreeApp)
 
 CourseTree turns a university course catalog into an interactive planning tool. A Python scraping and NLP pipeline extracts structured course data and requisite logic from unstructured catalog text, which are visualized through synchronized grid and DAG views built with React and TypeScript.
 
 Built end-to-end by a University of Calgary student, for students.
 
 Browse hundreds of courses at once in a high-density grid, with live requisite feedback that shows conflicts and missing prerequisites as you build your plan. Then, switch to a tree view to trace the full requisite chains and hierarchy of your personal plan.
-
 
 ## Screenshots
 
@@ -16,10 +16,6 @@ Browse hundreds of courses at once in a high-density grid, with live requisite f
 
 ![Grid View Screenshot](screenshots/Grid.png)
 *Grid View*
-
-## Tutorials & Resources
-
-[YouTube](https://www.youtube.com/@CourseTreeApp)
 
 ## Tech Stack
 
